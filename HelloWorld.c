@@ -8,5 +8,5 @@ main(){
 }
 
 void love(){
-    I love 우유
+    printf("I love 우유");
 }
