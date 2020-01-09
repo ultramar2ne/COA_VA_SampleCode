@@ -6,3 +6,7 @@ main(){
   printf("\n lee seong won");
   printf("\ntest");
 }
+
+void love(){
+    I love 우유
+}
