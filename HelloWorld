@@ -3,5 +3,5 @@
 main(){
   printf("Hello World!");
   printf("\n choi jun hee");
-  prinf("\n lee seong won");
+  printf("\n lee seong won");
 }
