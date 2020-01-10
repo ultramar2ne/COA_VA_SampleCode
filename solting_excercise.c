@@ -11,6 +11,8 @@
 #define SWAP(a,b) {int j = a; a = b; b = j;}
 #define nMax 10     //Maximum value of randNum array
 
+void printArray();
+
 main()
 {
     int selNum;
@@ -46,6 +48,18 @@ main()
           printf("It's wrong select, plz select again. \n\n");
           startMessage(selNum);  //need some loop expression
       }
-
     }
+}
+
+void printArray(int Array[]){
+    int count = 0;
+    int i;
+    for (i = 0; i < nMax; i++){
+        printf("%2d ",Array[i]);       //두자리수 출력
+        if (count++>3){                //5개씩 출력
+            printf("\n");
+            count = 0;
+        }
+    }
+    return 0;
 }
