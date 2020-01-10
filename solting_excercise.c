@@ -40,7 +40,7 @@ main()
           scanf("%d", &selNum);
           //arraySearching(selNum);
 
-      }else if{
+      }else if (selNum == 3) {
           printf("오케이~ 바이~ \n");
           break;
 
@@ -51,7 +51,8 @@ main()
     }
 }
 
-void printArray(int Array[]){
+void printArray(int Array[])
+{
     int count = 0;
     int i;
     for (i = 0; i < nMax; i++){
