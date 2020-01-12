@@ -8,7 +8,7 @@
 #include <time.h>
 
 #define _CRT_SECURE_NO_WARNINGS
-#define SWAP(a,b) {int j = a; a = b; b = j;}
+#define SWAP(type,a,b) do{type t=a;a=b;b=t;}while(0)
 #define nMax 10     //Maximum value of randNum array
 
 typedef enum{       //bool 타입 구현
@@ -18,8 +18,9 @@ typedef enum{       //bool 타입 구현
 
 void printArray();
 int setRand();
-
-main()
+void arraySorting(int randNum[],int input_Num);
+void arraySearching(int randNum[],int input_Num);
+int main()
 {
     int selNum;
     int randNum[nMax];
@@ -29,18 +30,18 @@ main()
         selNum = 0;
         setRand(randNum);
 
-        printf("Sample number : ");
+        printf("\n Sample number : \n");
         printArray(randNum,false);
         printf("What do you want to do..?\n");
-        printf("\nplz select \n(1)Solting (2)Searching (3)Exit >> ");
+        printf("\nplz select \n(1)Sorting (2)Searching (3)Exit >> ");
         scanf("%d",&selNum);
 
         if (selNum == 1){
-            printf("\nSolting Exercise\n");
+            printf("\nSorting Exercise\n");
             printf("Select sorting method\n");
             printf("(1)bubble (2)selection (3)insertion (4)Quick (5)exit >> ");
             scanf("%d", &selNum);
-            //arraySorting(selNum);
+            arraySorting(randNum,selNum);
 
         }else if (selNum == 2) {
             printf("\nSearching Excercise\n");
@@ -55,10 +56,10 @@ main()
 
         } else {
             printf("It's wrong select, plz select again. \n\n");
-            startMessage(selNum);  //need some loop expression
         }
 
     }
+    return 0;
 }
 
 void printArray(int Array[], bool mode)
@@ -73,7 +74,6 @@ void printArray(int Array[], bool mode)
             count = 0;
         }
     }
-    return 0;
 }
 
 int setRand(int randNum[]){ //난수 생성
@@ -91,4 +91,59 @@ int setRand(int randNum[]){ //난수 생성
     }
 
     return randNum;
+}
+
+void arraySorting(int randNum[],int input_Num){
+    while(input_Num!=5){
+        if(input_Num==1){           //Bubble Sort
+            for(int i=0;i<nMax-1;i++){
+                for(int j=nMax-1;j>i;j--){
+                    if(randNum[j-1]>randNum[j]){
+                        SWAP(int,randNum[j-1],randNum[j]);
+                    }
+                }
+            }
+            printf("Bubble Sorting Completed\n");
+            printArray(randNum,false);
+            input_Num=5;    
+            break;
+        }
+        else if(input_Num==2){
+            //Selection Sort
+
+        }
+        else if(input_Num==3){
+            //Insertion Sort
+
+        }
+        else if(input_Num==4){
+            //Quick Sort
+
+        }
+        else{
+            printf("It's wrong select, plz select again. \n\n");
+            printf("Select sorting method\n");
+            printf("(1)bubble (2)selection (3)insertion (4)Quick (5)exit >> ");
+            scanf("%d", &input_Num);
+        }
+    }
+}
+
+void arraySearching(int randNum[],int input_Num){
+    while(input_Num!=3){
+        if(input_Num==1){
+            //Binary Search
+
+        }
+        else if(input_Num==2){
+            //Tree Search
+
+        }
+        else{
+            printf("\nSearching Excercise\n");
+            printf("Select searching method\n");
+            printf("(1)binary (2)tree (3)exit >> ");
+            scanf("%d", &input_Num);
+        }
+    }
 }
