@@ -5,7 +5,9 @@
 // 수정일: 2020/01/12
 //***********************************************************
 // 업데이트 내역 : Bubble Sort 알고리즘 구현 by Oaflias
-// 업데이트 날짜 2020/01/13
+//              : Selection Sort 그리고 Insertion Sort 알고리즘 구현 by Oaflias
+// 최종 업데이트 날짜 2020/01/14
+// **********************************************************
 
 
 #include <stdio.h>
@@ -61,7 +63,6 @@ int main()
         } else {
             printf("It's wrong select, plz select again. \n\n");
         }
-
     }
     return 0;
 }
@@ -70,7 +71,6 @@ void printArray(int Array[], bool mode)
 {
     int count = 0;
     int i;
-
     for (i = 0; i < nMax; i++){
         printf("%2d ",Array[i]);       //두자리수 출력
         if (mode == 1 && count++>3){   //조건 만족 시 5개씩 출력
@@ -81,7 +81,6 @@ void printArray(int Array[], bool mode)
 }
 
 int setRand(int randNum[]){ //난수 생성
-
     srand((unsigned)time(NULL));
     int i,j;
     for(i = 0;i < nMax;i ++){       // sizeof(array)/sizeof(int) -> array.length
@@ -93,7 +92,6 @@ int setRand(int randNum[]){ //난수 생성
             }
         }
     }
-
     return randNum;
 }
 
@@ -114,11 +112,38 @@ void arraySorting(int randNum[],int input_Num){
         }
         else if(input_Num==2){
             //Selection Sort
-
+            int index_min;
+            for(int i=0;i<nMax-1;i++){
+                index_min=i;
+                for(int j=i+1;j<nMax;j++){
+                    if(randNum[j]<randNum[index_min]){
+                        index_min=j;
+                    }
+                }
+                if (i != index_min){
+                    SWAP(int,randNum[i],randNum[index_min]);
+                }
+                
+            }
+            printf("Selection Sorting Completed\n");
+            printArray(randNum,false);
+            input_Num=5;    
+            break;
         }
         else if(input_Num==3){
             //Insertion Sort
-
+            int temp,j;
+            for(int i=1;i<nMax;i++){
+                temp=randNum[i];
+                for(j=i;j>0 && randNum[j-1]>temp;j--){
+                    randNum[j]=randNum[j-1];
+                }
+                randNum[j]=temp;
+            }
+            printf("Insertion Sorting Completed\n");
+            printArray(randNum,false);
+            input_Num=5;    
+            break;
         }
         else if(input_Num==4){
             //Quick Sort
