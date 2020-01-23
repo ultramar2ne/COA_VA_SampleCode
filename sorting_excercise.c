@@ -1,11 +1,11 @@
-// 파일명: solting_excercise
+// 파일명: sorting_excercise
 // 이  름: CHOI JINWOOK
 // 이메일: jinsrobot@naver.com
 // 작성일: 2020/01/10
-// 수정일: 2020/01/14
+// 수정일: 2020/01/23
 
 #define _CRT_SECURE_NO_WARNINGS
-#define SWAP(a,b) {int temp = a; a = b; b = temp;}
+#define SWAP(a,b) do{temp = a; a = b; b = temp;}while(0)
 #define nMax 10     //Maximum value of randNum array
 
 #include <stdio.h>
@@ -18,58 +18,62 @@ typedef enum {       //bool 타입 구현
 } bool;
 
 void printArray();
-int arraySorting();
-int setRand();
+void arraySorting();
+void setRand();
 
-main()
+int main()
 {
 	int selNum;
 	int randNum[nMax];
 
-  char sortMode[][10] = {"0","Bubble","Selection","Insertion","Quick"};
-  char searchMode[][10] = {"0","Binary","QUeQUe"};
+    char sortMode[][10] = {"0","Bubble","Selection","Insertion","Quick"};
+    char searchMode[][10] = {"0","Binary","QUeQUe"};
 
 	while (1)
-  {
+    {
 		selNum = 0;
 		setRand(randNum);
 
 		printf("\nshuffle >>\n");
 		printArray(randNum, false);
 		printf("\nWhat do you want to do..?");
-		printf("\nplz select \n(1)Solting (2)Searching (3)Exit >> ");
+		printf("\nplz select \n(1)Sorting (2)Searching (3)Exit >> ");
 		scanf("%d", &selNum);
 
+
 		if (selNum == 1)
-    {
-			printf("\nSolting Exercise\n");
+    	{
+			printf("\nSorting Exercise\n");
 			printf("Select sorting method\n");
-			printf("(1)bubble (2)selection (3)insertion (4)Quick >> ");
+			printf("(1)Bubble (2)Selection (3)Insertion (4)Quick >> ");
 			scanf("%d", &selNum);
 
-      printf("\n%s solting Completed >>\n",sortMode[selNum]);
-      printArray(arraySorting(randNum,selNum),false);
+
+      		printf("\n%s Sorting Completed >>\n",sortMode[selNum]);
+			arraySorting(randNum,selNum);
+      		printArray(randNum,false);
 		}
 		else if (selNum == 2)
-    {
+    	{
 			printf("\nSearching Excercise\n");
-			printf("Select searching method\n");
+			printf("Select Searching method\n");
 			printf("(1)binary (2)tree >> ");
 			scanf("%d", &selNum);
 			//arraySearching(selNum);
 
+
 		}
 
 		else if (selNum == 3)
-    {
+    	{
 			printf("오케이~ 바이~ \n");
 			break;
 		}
 		else {
 			printf("\nIt's wrong select, plz select again. \n\n");
 		}
-
 	}
+	return 0;
 }
 
 void printArray(int Array[], bool mode)
@@ -87,7 +91,7 @@ void printArray(int Array[], bool mode)
 	printf("\n");
 }
 
-int setRand(int randNum[]) { //난수 생성
+void setRand(int randNum[]) { //난수 생성
 
 	srand((unsigned)time(NULL));
 	int i, j;
@@ -100,10 +104,9 @@ int setRand(int randNum[]) { //난수 생성
 			}
 		}
 	}
-	return randNum;
 }
 
-int arraySorting(int array[], int mode){
+void arraySorting(int array[], int mode){
     //if mode 1 is bubble, 2 selection, 3 quick sort Algorithm
 
     int i,j,temp;
@@ -111,47 +114,43 @@ int arraySorting(int array[], int mode){
     switch (mode)
     {
     case 1:         //bubble
-      for(i = 0 ; i < nMax-1 ; i++){
-        for(j = nMax-1 ; j > i ; j--){
-          if(array[j-1] > array[j]){
-            SWAP(array[j-1],array[j]);
-          }
-        }
-      }
-      break;
-
-    case 2:         //selection
-      for(i = 0 ; i < nMax-1 ; i++){
-        temp = i;
-        for(j = i+1 ; j < nMax ; j++){
-            if(array[j] < array[temp]){
-              temp = j;
+        for(i = 0 ; i < nMax-1 ; i++){
+            for(j = nMax-1 ; j > i ; j--){
+                if(array[j-1] > array[j]){
+                    SWAP(array[j-1],array[j]);
+                }
             }
         }
-        if (i != temp){
-            SWAP(array[i],array[temp]);
-        }
-      }
-      break;
+        break;
+
+    case 2:         //selection
+		for(i=0; i<nMax-1; i++){
+    		temp= i;
+    		for(j=i+1; j<nMax; j++){
+      			if(array[j]<array[temp])
+        			temp = j;
+    		}
+    		if(i!= temp){
+        		SWAP(array[i], array[temp]);
+    		}
+ 		}
+        break;
 
     case 3:       //Insertions
-      for (i = 1 ; i < nMax ; i++) {
-        temp = array[i];
-        for(j = i ; j > 0 && array[j-1] > temp ; j--){
-            array[j] = array[j-1];
+        for (i = 1 ; i < nMax ; i++) {
+            temp = array[i];
+            for(j = i ; j > 0 && array[j-1] > temp ; j--){
+                array[j] = array[j-1];
+            }
+            array[j] = temp;		
         }
-        array[j] = temp;
-				
-      }
-      break;
+        break;
 
     case 4:       //Quick
 
-      break;
+        break;
 
     default:
         break;
     }
-
-    return array;
 }
