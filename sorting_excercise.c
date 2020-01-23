@@ -210,10 +210,9 @@ void arraySearching(int array[], int mode) {
 			}
 			break;
 		case 2:
-
+			//Tree Searching Algorithm
 			break;
 		default:
 			break;
 	}
-
 }
