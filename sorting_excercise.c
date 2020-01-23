@@ -5,7 +5,7 @@
 // 수정일: 2020/01/23
 
 #define _CRT_SECURE_NO_WARNINGS
-#define SWAP(a,b) do{temp = a; a = b; b = temp;}while(0)
+#define SWAP(a,b) {temp = a; a = b; b = temp;}
 #define nMax 10     //Maximum value of randNum array
 
 #include <stdio.h>
@@ -20,6 +20,7 @@ typedef enum {       //bool 타입 구현
 void printArray();
 void arraySorting();
 void setRand();
+void quick(int array[], int left, int right);
 
 int main()
 {
@@ -66,7 +67,7 @@ int main()
 
 		else if (selNum == 3)
     	{
-			printf("오케이~ 바이~ \n");
+			printf("Okay~ Bye~ \n");
 			break;
 		}
 		else {
@@ -74,6 +75,7 @@ int main()
 		}
 	}
 	return 0;
+
 }
 
 void printArray(int Array[], bool mode)
@@ -92,8 +94,7 @@ void printArray(int Array[], bool mode)
 }
 
 void setRand(int randNum[]) { //난수 생성
-
-	srand((unsigned)time(NULL));
+	srand((unsigned int)time(NULL));
 	int i, j;
 	for (i = 0; i < nMax; i++) {       // sizeof(array)/sizeof(int) -> array.length
 		randNum[i] = rand() % (nMax + 1);
@@ -106,10 +107,38 @@ void setRand(int randNum[]) { //난수 생성
 	}
 }
 
+void quick(int array[], int left, int right) {
+	int L = left;
+	int R = right;
+	int pnum = (L + R) / 2;
+	int pivot = array[pnum];
+	int temp = 0;
+	do {
+		while (array[L] < pivot) {
+			L++;
+		}
+		while (array[R] > pivot) {
+			R--;
+		}
+		if (L <= R){
+			SWAP(array[L], array[R]);
+		}		
+		L++;
+		R--;
+		if (left < R) {
+			quick(array, left, R);
+		}
+		if (L < right) {
+			quick(array, L, right);
+		}
+	} while (L <= R);
+}
+
 void arraySorting(int array[], int mode){
     //if mode 1 is bubble, 2 selection, 3 quick sort Algorithm
 
     int i,j,temp;
+	
 
     switch (mode)
     {
@@ -131,7 +160,10 @@ void arraySorting(int array[], int mode){
         			temp = j;
     		}
     		if(i!= temp){
-        		SWAP(array[i], array[temp]);
+				//SWAP(array[i], array[temp]);// 메크로 함수가 잘 작동하지 않음...
+				j = array[i];
+				array[i] = array[temp];
+				array[temp] = j;
     		}
  		}
         break;
@@ -147,7 +179,7 @@ void arraySorting(int array[], int mode){
         break;
 
     case 4:       //Quick
-
+		quick(array, 0, nMax-1);
         break;
 
     default:
