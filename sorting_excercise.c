@@ -17,10 +17,11 @@ typedef enum {       //bool 타입 구현
 	false = 0
 } bool;
 
-void printArray();
-void arraySorting();
-void setRand();
+void printArray(int Array[], bool mode);
+void arraySorting(int Array[], int mode);
+void setRand(int randNum[]);
 void quick(int array[], int left, int right);
+void arraySearching(int array[], int mode);
 
 int main()
 {
@@ -41,7 +42,6 @@ int main()
 		printf("\nplz select \n(1)Sorting (2)Searching (3)Exit >> ");
 		scanf("%d", &selNum);
 
-
 		if (selNum == 1)
     	{
 			printf("\nSorting Exercise\n");
@@ -60,11 +60,8 @@ int main()
 			printf("Select Searching method\n");
 			printf("(1)binary (2)tree >> ");
 			scanf("%d", &selNum);
-			//arraySearching(selNum);
-
-
+			arraySearching(randNum, selNum);
 		}
-
 		else if (selNum == 3)
     	{
 			printf("Okay~ Bye~ \n");
@@ -75,11 +72,9 @@ int main()
 		}
 	}
 	return 0;
-
 }
 
-void printArray(int Array[], bool mode)
-{
+void printArray(int Array[], bool mode){
 	int count = 0;
 	int i;
 
@@ -136,11 +131,9 @@ void quick(int array[], int left, int right) {
 
 void arraySorting(int array[], int mode){
     //if mode 1 is bubble, 2 selection, 3 quick sort Algorithm
-
     int i,j,temp;
 	
-
-    switch (mode)
+	switch (mode)
     {
     case 1:         //bubble
         for(i = 0 ; i < nMax-1 ; i++){
@@ -185,4 +178,42 @@ void arraySorting(int array[], int mode){
     default:
         break;
     }
+}
+
+void arraySearching(int array[], int mode) {
+	quick(array,0, nMax - 1);
+	printArray(array, false);
+	//mode 1: binary Searching  mode 2 :tree >> "
+	int key, temp;
+	printf("Target : ");
+	scanf("%d", &key);
+	int L = 0;
+	int R = nMax-1;
+	switch (mode) {
+		case 1://binary Searching
+			do {
+				temp = (L + R) / 2;
+				if (array[temp] == key) {
+					printf("index of \"%d\" is %d\n", key, temp);
+					temp = -1;
+					break;
+				}
+				else if (array[temp] < key) {
+					L = temp + 1;
+				}
+				else {
+					R = temp - 1;
+				}
+			} while (L <= R);
+			if (temp != -1) {
+				printf("Failed, Target doesn't exist");
+			}
+			break;
+		case 2:
+
+			break;
+		default:
+			break;
+	}
+
 }
