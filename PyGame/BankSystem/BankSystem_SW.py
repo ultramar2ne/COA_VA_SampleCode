@@ -31,7 +31,7 @@ class App:
         self.accountlist = []
 
     def searchID(self):
-        ID=input("계좌ID : ")
+        ID = input("계좌ID : ")
         for account in self.accountlist:
             if account.id == ID:
                 return self.accountlist.index(account)
