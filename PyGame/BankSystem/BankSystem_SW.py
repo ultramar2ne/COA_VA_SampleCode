@@ -42,7 +42,7 @@ class App:
             account.infoprint()
 
     def run(self, key):
-        if int(key) == 1:
+        if key == 1:
             print("[입 금]")
             accountID = input("계좌ID : ")
             name = input("이름 : ")
@@ -51,7 +51,7 @@ class App:
             self.accountlist.append(tmp)
             return True
 
-        elif int(key) == 2:
+        elif key == 2:
             idx = self.searchID()
             if idx != -1:
                 self.accountlist[idx].deposit()
@@ -60,7 +60,7 @@ class App:
 
             return True
 
-        elif int(key) == 3:
+        elif key == 3:
             idx = self.searchID()
             if idx != -1:
                 self.accountlist[idx].withdraw()
@@ -68,11 +68,11 @@ class App:
                 print("없는 계좌번호입니다.")
             return True
 
-        elif int(key) == 4:
+        elif key == 4:
             self.info()
             return True
 
-        elif int(key) == 5:
+        elif key == 5:
             return False
 
         else:
@@ -88,7 +88,7 @@ class App:
             print("3. 출금")
             print("4. 계좌정보 전체 출력")
             print("5. 프로그램종료")
-            key = input("선택: ")
+            key = int(input("선택: "))
             cmd = self.run(key)
 
 
