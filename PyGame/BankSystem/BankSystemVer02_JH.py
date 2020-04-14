@@ -5,7 +5,7 @@ class Bank:
 		-------Menu-------
 		1. Open an account
 		2. Make a deposit
-		3. Withdrawl
+		3. Withdrawal
 		4. Account info
 		5. Quit
 		Selection : '''
@@ -50,7 +50,7 @@ class Bank:
 		Index = Bank.Find_data(info_list,account_num)
 		info_list[Index].Deposit += int(Amount + info_list[Index].Deposit*info_list[Index].Interest_rate)
 	
-	def Withdrawl():
+	def Withdrawal():
 		print('\n------Withdrawal------')
 		account_num = input('Account ID :')
 		Amount = -int(input('Withdrawal amount : '))
@@ -110,7 +110,7 @@ if __name__=='__main__':
 			Bank.Make_deposit()
 		
 		elif Sel_Num == '3':
-			Bank.Withdrawl()
+			Bank.Withdrawal()
 			
 		elif Sel_Num == '4':
 			Bank.Print_account()
