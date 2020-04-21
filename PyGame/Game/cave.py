@@ -19,7 +19,7 @@ def main():
     slope =randint(1, 6)
     sysfont = pygame.font.SysFont(None, 36)
     ship_image = pygame.image.load("airplane.png")
-    bang_image = pygame.image.load("C:\\Users\\owl06\\PycharmProjects\\back\\venv\\Lib\\site-packages\\pygame"
+    bang_image = pygame.image.load("C:\\Users\\[user_name]\\PycharmProjects\\back\\venv\\Lib\\site-packages\\pygame"
                                    "\\examples\\data\\explosion1.gif")
     holes = []
     for xpos in range(walls):
